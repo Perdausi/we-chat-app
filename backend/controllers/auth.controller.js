@@ -30,8 +30,9 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
     // HASH THE PASSWORD WITH SALT
 
-    const boyProfile = `https://avatar.iran.liara.run/public/boy?username=${username}`;
-    const girlProfile = `https://avatar.iran.liara.run/public/girl?username=${username}`;
+    const boyProfile = `https://api.dicebear.com/6.x/adventurer/svg?seed=Easton`;
+    const girlProfile = `https://api.dicebear.com/9.x/adventurer/svg?seed=Vivian`;
+
     // SET DEFAULT PROFILE PIC FOR THE USER - DETERMINE THE GENDER OF THE USER
 
     const newUser = new User({
@@ -69,6 +70,9 @@ export const login = async (req, res) => {
     try {
         const {username, password} = req.body; // GET THE USERNAME AND PASSWORD FROM THE REQUEST BODY
         const user = await User.findOne({ username }); // FIND THE USER WITH THE USERNAME
+        if (!user) {
+            return res.status(400).json({ error: "Invalid username or password" });
+        } // Check if user exists before comparing passwords
         const isValidPassword = await bcrypt.compare(password, user.password || ""); // COMPARE THE PASSWORD WITH THE HASHED PASSWORD
         
 

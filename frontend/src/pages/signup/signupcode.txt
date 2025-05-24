@@ -1,0 +1,90 @@
+
+
+export const SignUp = () => {
+    const [inputs, setInputs] = useState({
+        fullname: "",
+        username: "",
+        password: "",
+        ConfirmPassword: "",
+        gender: ""
+    });
+    
+    const handleCheckBoxChange = (gender) => {
+        setInputs({...inputs, gender});
+    }
+
+    const {loading, signup} = useSignup();
+    
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        console.log(inputs);
+
+        await signup(inputs);
+    }
+
+    return (
+        <div className='rounded shadow-lg bg-gray-900 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-50 w-1/2 md:w-screen h-full'>
+            <div className="p-5 w-1/2">
+                <form onSubmit={handleSubmit} className='p-2 sm:p-5'>
+                    <div className='flex items-center justify-center flex-col w-full mb-2'>
+                        <label className='text-left w-full'>Full Name</label>
+                        <input type="text" placeholder="full name" className="input input-bordered w-full bg-primary" 
+                            value={inputs.fullname}
+                            onChange={(e) => setInputs({ ...inputs, fullname: e.target.value })}
+                        />
+                    </div>
+
+                    <div className='flex items-center justify-center flex-col w-full mb-2'>
+                        <label className='text-left w-full'>Username</label>
+                        <input type="text" placeholder="username" className="input input-bordered w-full bg-primary" 
+                            value={inputs.username}
+                            onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
+                        />
+                    </div>
+
+                    <div className='flex items-center justify-center flex-col w-full mb-2'>
+                        <label className='text-left w-full'>Password</label>
+                        <input type="text" placeholder="password" className="input input-bordered w-full bg-primary" 
+                            value={inputs.password}
+                            onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
+                        />
+                    </div>
+
+                    <div className='flex items-center justify-center flex-col w-full mb-2'>
+                        <label className='text-left w-full'>Confirm Password</label>
+                        <input type="text" placeholder="confirm password" className="input input-bordered w-full bg-primary mb-2" 
+                            value={inputs.ConfirmPassword}
+                            onChange={(e) => setInputs({ ...inputs, ConfirmPassword: e.target.value })}
+                        />
+                    </div>
+                    <GenderCheck onCheckBoxChange={handleCheckBoxChange} selectedGender={inputs.gender}/>
+
+                    <div><button className='rounded p-2 w-full mt-2 bg-black hover:bg-gray-800 transition-all duration-300 ease-in-out mb-2'>Sign Up!</button></div>
+                    <Link to={"/"} className='hover:underline text-sm md:text-lg'>Already have an account? back to login</Link>
+
+                    
+                </form>
+            </div> 
+        </div>
+      )
+}
+
+
+
+
+
+                    <fieldset className="fieldset">
+                    <label className="fieldset-label">Full Name</label>
+                    <input type="text" className="input" placeholder="full name" />
+
+                    <label className="fieldset-label">Username</label>
+                    <input type="text" className="input" placeholder="username" />
+
+                    <label className="fieldset-label">Password</label>
+                    <input type="password" className="input" placeholder="password" />
+
+                    <label className="fieldset-label">Confirm Password</label>
+                    <input type="password" className="input" placeholder="Confirm Password" />
+                    <div><Link to={"/"} className="link link-hover">Already have account?</Link></div>
+                    <button className="btn btn-neutral mt-4">Login</button>
+                    </fieldset>

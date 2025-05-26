@@ -5,10 +5,10 @@ import authRoutes from './routes/auth.routes.js';
 import messageRoutes from './routes/message.routes.js';
 import userRoutes from './routes/user.routes.js';
 import connectDB from './db/connectDB.js';
-
+import { app, server } from './socket/socket.js';
 
 dotenv.config();
-const app = express();
+// const app = express(); transfer to the socket.js then import it here "import app from socket.js"
 app.use(express.json());
 app.use(cookieParser());
 
@@ -19,7 +19,7 @@ app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 
 
-app.listen(port,()=> {
+server.listen(port,()=> {
     connectDB();
     console.log(`server running on port ${port}`)
 });

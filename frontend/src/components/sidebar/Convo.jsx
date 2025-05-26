@@ -1,8 +1,13 @@
 import useConversation from "../../zustand/useConversation"
+import {useSocketContext} from '../../context/SocketContext'
 
 const Convo = ({conversation, lastIdx}) => {
       const {selectedConversation, setSelectedConversation} = useConversation();
       const isSelected = selectedConversation?._id === conversation._id;
+
+      const {onlineUsers} = useSocketContext();
+      const isOnline = onlineUsers.includes(conversation._id);
+
 
   return (
     <>
@@ -11,7 +16,7 @@ const Convo = ({conversation, lastIdx}) => {
       `} onClick={()=> setSelectedConversation(conversation)}>
       <div className="flex flex-col md:flex-row items-center gap-2 w-full">
         {/* Avatar */}
-        <div className="avatar avatar-online">
+        <div className={`avatar ${isOnline ? "avatar-online" : ""}`}>
             <div className="w-8 md:w-12 lg:w-20 rounded-full">
             <img
                 src={conversation.profilePic}
@@ -32,13 +37,15 @@ const Convo = ({conversation, lastIdx}) => {
             {/* Full name on medium+ screens */}
             <p className="text-white font-semibold text-lg md:text-md lg:sm hidden md:block whitespace-nowrap">
               {conversation.fullname}
-            </p>
-
-            <p className="text-lg md:text-xs lg:text-md text-gray-300 hidden md:block">You: Haha, nice one!</p>
+            </p>  
+            
           </div>
 
           {/* Time (hidden on mobile) */}
-          <div className="hidden md:hidden lg:block text-sm text-gray-400">7:30</div>
+            {/* <div className="md:flex flex-none items-center justify-center gap-2">
+              <div className="status status-error md:block hidden"></div>
+              <p className="text-xs text-warning  md:block hidden">Unread messages</p>
+            </div> */}
         </div>
 
       </div>

@@ -7,17 +7,15 @@ const Convo = ({conversation, lastIdx}) => {
 
       const {onlineUsers} = useSocketContext();
       const isOnline = onlineUsers.includes(conversation._id);
-
-
   return (
     <>
-    <div className={`mb-3 flex-row md:flex items-center cursor-pointer md:hover:bg-primary rounded
+    <div className={`flex-row md:flex items-center cursor-pointer md:hover:bg-primary rounded p-2
       ${isSelected ? "md:bg-primary" : ""}
       `} onClick={()=> setSelectedConversation(conversation)}>
-      <div className="flex flex-col md:flex-row items-center gap-2 w-full">
+      <div className="flex flex-col md:flex-row items-center gap-3 w-full">
         {/* Avatar */}
         <div className={`avatar ${isOnline ? "avatar-online" : ""}`}>
-            <div className="w-8 md:w-12 lg:w-20 rounded-full">
+            <div className="w-8 md:w-12 lg:w-14 rounded-full">
             <img
                 src={conversation.profilePic}
                 alt="avatar"
@@ -50,7 +48,7 @@ const Convo = ({conversation, lastIdx}) => {
 
       </div>
     </div>
-    {!lastIdx && <div className='divider my-0 py-0 h-5'></div>}
+    {!lastIdx && <div className='divider my-0 py-0'></div>}
     </>
   )
 }

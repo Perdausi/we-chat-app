@@ -79,7 +79,7 @@ const handleSubmit = async(e) => {
             <Link to={"/"} className="link link-hover text-sm text-gray-300 hover:text-primary">Already have an account?</Link>
           </div>
           <button className="rounded py-2 bg-primary text-white mt-4 hover:bg-primary/80 w-full border-none" disabled={loading}>
-            {loading ? <span className='loading loading-spinner'></span> : "Sig up"}
+            {loading ? <span className='loading loading-spinner'></span> : "Sign up"}
           </button>
         </fieldset>
         </form>

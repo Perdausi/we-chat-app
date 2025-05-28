@@ -30,8 +30,8 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
     // HASH THE PASSWORD WITH SALT
 
-    const boyProfile = `https://api.dicebear.com/6.x/adventurer/svg?seed=Easton`;
-    const girlProfile = `https://api.dicebear.com/9.x/adventurer/svg?seed=Vivian`;
+    const avatarUrl = `https://api.dicebear.com/9.x/avataaars-neutral/svg?seed=${Math.random().toString(36).substring(7)}`;
+
 
     // SET DEFAULT PROFILE PIC FOR THE USER - DETERMINE THE GENDER OF THE USER
 
@@ -40,7 +40,7 @@ export const signup = async (req, res) => {
         username,
         password: hashedPassword,
         gender,
-        profilePic: gender === "male" ? boyProfile : girlProfile
+        profilePic: avatarUrl
     });
     // CREATE A NEW USER WITH THE HASHED PASSWORD AND DEFAULT PROFILE PIC
 
